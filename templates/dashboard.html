@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bảng điều khiển</title>
+</head>
+<body>
+    <h2>Chào mừng {{ current_user.email }}</h2>
+    <a href="/logout">Đăng xuất</a>
+
+    <h3>Rút gọn link mới</h3>
+   <form method="POST" action="/shorten">
+    <input type="url" name="original" placeholder="Dán link dài vào đây" required><br>
+    <input type="text" name="custom_code" placeholder="Mã rút gọn (tùy chọn)"><br>
+    <button type="submit">Rút gọn</button>
+</form>
+
+    <h3>Danh sách link đã tạo</h3>
+    <ul>
+    {% for url in urls %}
+        <li>
+            <a href="/{{ url.short_code }}" target="_blank">/{{ url.short_code }}</a>
+            ({{ url.clicks }} lượt click) - {{ url.original }}
+        </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
